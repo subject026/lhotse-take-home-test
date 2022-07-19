@@ -73,14 +73,12 @@ const TagSection: React.FC<ITagSectionProps> = ({
         {isAddingTags &&
           (suggestedTags ? (
             <SelectInput
-              addTag={addTag}
               handleKeydown={handleKeydown}
               finishAddingTags={finishAddingTags}
               suggestedTags={suggestedTags}
             />
           ) : (
             <TextInput
-              addTag={addTag}
               handleKeydown={handleKeydown}
               finishAddingTags={finishAddingTags}
             />

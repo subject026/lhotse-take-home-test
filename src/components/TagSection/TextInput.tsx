@@ -1,13 +1,6 @@
 import React, { RefObject } from "react";
 
-import { TTagCategory, TTagType } from "../../types";
-
 interface ITextInputProps {
-  addTag: (
-    tagCategory: TTagCategory,
-    tagType: TTagType,
-    tagName: string
-  ) => void;
   handleKeydown: (
     event: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
     inputRef: RefObject<HTMLSelectElement | HTMLInputElement>
