@@ -24,20 +24,6 @@ const SelectInput: React.FC<ITextInputProps> = ({
 }) => {
   const inputRef = React.useRef<HTMLSelectElement>(null);
 
-  // const handleKeydown = (event: React.KeyboardEvent<HTMLSelectElement>) => {
-  //   if (!event.target.value) return;
-  //   if (event.key === "Enter") {
-  //     console.log("enter, input value: ", event.target.value);
-  //     addTag(category, type, event.target.value);
-  //     finishAddingTags();
-  //   }
-  //   if (event.key === "Tab") {
-  //     event.preventDefault();
-  //     addTag(category, type, event.target.value);
-  //     if (inputRef.current) inputRef.current.value = "";
-  //   }
-  // };
-
   React.useEffect(() => {
     inputRef.current?.focus();
   }, []);
