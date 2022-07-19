@@ -1,14 +1,10 @@
 import React, { RefObject } from "react";
 
-import { TSuggestedTagList, TTagCategory, TTagType } from "../../types";
+import { TSuggestedTagList } from "../../types";
 
 interface ITextInputProps {
   suggestedTags: TSuggestedTagList;
-  addTag: (
-    tagCategory: TTagCategory,
-    tagType: TTagType,
-    tagName: string
-  ) => void;
+
   handleKeydown: (
     event: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
     inputRef: RefObject<HTMLSelectElement | HTMLInputElement>
@@ -17,7 +13,6 @@ interface ITextInputProps {
 }
 
 const SelectInput: React.FC<ITextInputProps> = ({
-  addTag,
   handleKeydown,
   finishAddingTags,
   suggestedTags,
