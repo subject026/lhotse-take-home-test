@@ -1,4 +1,4 @@
-import React from "react";
+import React, { RefObject } from "react";
 
 import AddTagButton from "./AddTagButton";
 import SelectInput from "./SelectInput";
@@ -23,12 +23,33 @@ interface ITagSectionProps {
 const TagSection: React.FC<ITagSectionProps> = ({
   displayName,
   tagList,
-  tagMeta,
+  tagMeta: { category, type },
   addTag,
   removeTag,
   suggestedTags,
 }) => {
   const [isAddingTags, setIsAddingTags] = React.useState(true);
+
+  const handleKeydown = (
+    event: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
+    inputRef: RefObject<HTMLSelectElement | HTMLInputElement>
+  ) => {
+    if (!event.target.value) return;
+    if (event.key === "Enter") {
+      console.log("enter, input value: ", event.target.value);
+      addTag(category, type, event.target.value);
+      setIsAddingTags(false);
+    }
+    if (event.key === "Tab") {
+      event.preventDefault();
+      addTag(category, type, event.target.value);
+      if (inputRef.current) inputRef.current.value = "";
+    }
+  };
+
+  const finishAddingTags = () => {
+    setIsAddingTags(false);
+  };
 
   return (
     <section>
@@ -36,9 +57,9 @@ const TagSection: React.FC<ITagSectionProps> = ({
       <ul className="h-8 flex flex-row flex-wrap gap-2">
         {tagList.map((tagData, i) => (
           <Tag
-            key={`${tagMeta.category}_${tagData.id}`}
+            key={`${category}_${tagData.id}`}
             tagData={tagData}
-            category={tagMeta.category}
+            category={category}
             isFirstTag={i === 0}
             removeTag={removeTag}
           />
@@ -46,16 +67,16 @@ const TagSection: React.FC<ITagSectionProps> = ({
         {isAddingTags &&
           (suggestedTags ? (
             <SelectInput
-              tagMeta={tagMeta}
-              finishAddingTags={() => setIsAddingTags(false)}
               addTag={addTag}
+              handleKeydown={handleKeydown}
+              finishAddingTags={finishAddingTags}
               suggestedTags={suggestedTags}
             />
           ) : (
             <TextInput
-              tagMeta={tagMeta}
-              finishAddingTags={() => setIsAddingTags(false)}
               addTag={addTag}
+              handleKeydown={handleKeydown}
+              finishAddingTags={finishAddingTags}
             />
           ))}
         {!isAddingTags && (
