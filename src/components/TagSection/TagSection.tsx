@@ -34,12 +34,19 @@ const TagSection: React.FC<ITagSectionProps> = ({
     event: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
     inputRef: RefObject<HTMLSelectElement | HTMLInputElement>
   ) => {
-    if (!event.target.value) return;
     if (event.key === "Enter") {
+      if (!event.target.value) {
+        inputRef.current?.blur();
+        return;
+      }
       addTag(category, type, event.target.value);
       setIsAddingTags(false);
     }
     if (event.key === "Tab") {
+      if (!event.target.value) {
+        inputRef.current?.blur();
+        return;
+      }
       event.preventDefault();
       addTag(category, type, event.target.value);
       if (inputRef.current) inputRef.current.value = "";
