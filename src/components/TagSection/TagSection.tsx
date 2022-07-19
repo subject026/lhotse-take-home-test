@@ -36,7 +36,6 @@ const TagSection: React.FC<ITagSectionProps> = ({
   ) => {
     if (!event.target.value) return;
     if (event.key === "Enter") {
-      console.log("enter, input value: ", event.target.value);
       addTag(category, type, event.target.value);
       setIsAddingTags(false);
     }
