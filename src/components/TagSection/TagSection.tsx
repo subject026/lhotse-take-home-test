@@ -28,7 +28,7 @@ const TagSection: React.FC<ITagSectionProps> = ({
   removeTag,
   suggestedTags,
 }) => {
-  const [isAddingTags, setIsAddingTags] = React.useState(true);
+  const [isAddingTags, setIsAddingTags] = React.useState(false);
 
   const handleKeydown = (
     event: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
