@@ -17,7 +17,7 @@ const Tag: React.FC<ITagProps> = ({
 }) => {
   return (
     <li className="bg-neutral-200 px-3 py-1 rounded-full outline-white flex items-center">
-      <span>{tagData.name}</span>
+      <span data-test="tag-text">{tagData.name}</span>
       {!isFirstTag && (
         <button
           className="pl-2 text-gray-500 hover:text-gray-800"
