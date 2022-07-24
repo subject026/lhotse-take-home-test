@@ -60,7 +60,7 @@ const TagSection: React.FC<ITagSectionProps> = ({
   return (
     <section data-test={category}>
       <h3 className="text-gray-700 mb-2">{displayName}</h3>
-      <ul className="h-8 flex flex-row flex-wrap gap-2">
+      <ul className="min-h-8 flex flex-row flex-wrap gap-2">
         {tagList.map((tagData, i) => (
           <Tag
             key={`${category}_${tagData.id}`}
