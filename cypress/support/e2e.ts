@@ -16,8 +16,9 @@
 // Import commands.js using ES2015 syntax:
 import "./commands";
 
-// tab plugin
-import "cypress-plugin-tab";
+// real events needed to properly test tabs handling
+// see request for tab feature: https://github.com/cypress-io/cypress/issues/299
+import "cypress-real-events/support";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

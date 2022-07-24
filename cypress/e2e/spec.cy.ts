@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+/// <reference types="cypress-real-events" />
 
 import { supplier } from "../../src/data";
 
@@ -29,13 +30,11 @@ describe("App Renders Correct Initial Data", () => {
 
 describe("Can add freetext tags to general category", () => {
   it("can add a single tag using enter key", () => {
+    cy.get('[data-test="tags-general"]').as("tagsGeneral");
     const newTagText = "new tag text";
     // creating an alias
-    cy.get('[data-test="tags-general"]').as("tagsGeneral");
     cy.get("@tagsGeneral").find('[data-js="btn-add-tag"]').click();
     cy.focused().type(newTagText).type("{enter}");
-
-    // there should no longer be a focused element
     cy.focused().should("not.exist");
     // there should no longer be a text input rendered
     cy.get("@tagsGeneral").find("input").should("not.exist");
@@ -43,38 +42,21 @@ describe("Can add freetext tags to general category", () => {
     cy.get("@tagsGeneral").contains(newTagText);
   });
 
-  /*
-  see request for tab feature: https://github.com/cypress-io/cypress/issues/299
-
-  cypress-plugin-tab seems a bit buggy possibly doesn't support event.preventDafault():
-  https://github.com/kuceb/cypress-plugin-tab/issues/52
-
-  Maybe try keyboard plugin: https://www.npmjs.com/package/cypress-keyboard-plugin
-
-  Or real events (only works with chrome apparently) with: https://github.com/dmtrKovalenko/cypress-real-events
-
-
-  
   it("can add multiple tags using tab key", () => {
-      const newTagText = [
-        "multiple tags 1",
-        "multiple tags 2",
-        "multiple tags 1",
-      ];
-      // creating an alias
-      cy.get('[data-test="tags-general"]').as("tagsGeneral");
-      cy.get("@tagsGeneral").find('[data-js="btn-add-tag"]').click();
-      cy.focused().type(newTagText[0]).tab();
-      // cy.focused().should("exist");
-      // cy.focused().type(newTagText[1]).tab();
-
-      // cy.focused().type(newTagText[2]).tab();
-      // newTagText.forEach((tag) => {
-        // });
-        
-        // // input should still be focused
-        // cy.focused().should("exist");
-      });
-      
-    */
+    const newTagText = [
+      "multiple tags 1",
+      "multiple tags 2",
+      "multiple tags 1",
+    ];
+    // creating an alias
+    cy.get('[data-test="tags-general"]').as("tagsGeneral");
+    cy.get("@tagsGeneral").find('[data-js="btn-add-tag"]').click();
+    cy.focused().type(newTagText[0]).realPress("Tab");
+    cy.focused().type(newTagText[1]).realPress("Tab");
+    cy.focused().type(newTagText[2]).realPress("Tab");
+    // page should now contain new tag text
+    newTagText.forEach((tag) => {
+      cy.contains(tag);
+    });
+  });
 });
