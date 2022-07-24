@@ -20,8 +20,9 @@ const TextInput: React.FC<ITextInputProps> = ({
   }, []);
   return (
     <input
-      className="outline-blue-400 rounded-full px-4 py-1 w-32"
       ref={inputRef}
+      data-test="input-text"
+      className="outline-blue-400 rounded-full px-4 py-1 w-32"
       type="text"
       onKeyDown={(event) => handleKeydown(event, inputRef)}
       onBlur={finishAddingTags}

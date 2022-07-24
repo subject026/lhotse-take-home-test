@@ -16,10 +16,14 @@ const Tag: React.FC<ITagProps> = ({
   removeTag,
 }) => {
   return (
-    <li className="bg-neutral-200 px-3 py-1 rounded-full outline-white flex items-center">
+    <li
+      data-test="tag"
+      className="bg-neutral-200 px-3 py-1 rounded-full outline-white flex items-center"
+    >
       <span data-test="tag-text">{tagData.name}</span>
       {!isFirstTag && (
         <button
+          data-test="btn-remove-tag"
           className="pl-2 text-gray-500 hover:text-gray-800"
           onClick={() => removeTag(category, tagData.id)}
         >

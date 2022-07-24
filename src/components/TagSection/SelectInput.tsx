@@ -25,6 +25,7 @@ const SelectInput: React.FC<ITextInputProps> = ({
   return (
     <select
       ref={inputRef}
+      data-test="input-select"
       className="px-4 py-1 rounded-full outline-blue-400"
       onBlur={finishAddingTags}
       onKeyDown={(event) => handleKeydown(event, inputRef)}
